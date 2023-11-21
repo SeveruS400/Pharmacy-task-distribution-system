@@ -1,0 +1,57 @@
+﻿@using Entities.Models;
+@model MazeretBilgileri
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mazeret Bilgileri</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+<body>
+    <form asp-controller="MazeretBilgileri" asp-action="MazeretBilgileriKayit" method="post">
+        <div class="row mb-3">
+            <label asp-for="@Model.EczaneBilgileriId" class="form-label">Eczane Adı:</label>
+            <select asp-for="@Model.EczaneBilgileriId" class="form-control">
+                <option value="">Eczane Seçin</option>
+                @foreach (var eczaneAdi in ViewBag.Eczaneler)
+                {
+                    <option value="@eczaneAdi.Value">@eczaneAdi.Text</option>
+                }
+            </select>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="@Model.BaslamaTarihi">Başlama Tarihi Seç:</label>
+            <input asp-for="@Model.BaslamaTarihi" id="datepicker" class="form-control">
+            <input type="hidden" id="formattedDate" name="formattedDate" />
+        </div>
+        <div class="row mb-3">
+            <label asp-for="@Model.BitisTarihi" class="form-label">Bitis Tarihi Seç:</label>
+            <input asp-for="@Model.BitisTarihi" class="form-control" />
+        </div>
+        <div class="row mb-3">
+            <label asp-for="@Model.Acıklama" class="form-label">Açıklama:</label>
+            <input asp-for="@Model.Acıklama" class="form-control" />
+        </div>
+        <div class="row mb-3">
+            <label asp-for="@Model.IslemTarihi">Tarih Seç:</label>
+            <input asp-for="@Model.IslemTarihi" id="datepicker" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Gönder</button>
+    </form>
+</body>
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#datepicker').datepicker({
+            dateFormat: 'dd/mm/yy',
+            changeMonth: true,
+            changeYear: true,
+            onSelect: function (dateText, inst) {
+                // Seçilen tarihi gizli alana ekleyerek formu gönder
+                $('#formattedDate').val(dateText);
+            }
+        });
+    });
+</script>
+</html> 

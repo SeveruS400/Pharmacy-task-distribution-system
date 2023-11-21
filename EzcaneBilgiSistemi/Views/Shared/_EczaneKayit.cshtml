@@ -1,0 +1,146 @@
+﻿@using Entities.Models;
+@model EczaneBilgileri
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Eczane Bilgileri</title>
+</head>
+<body>
+
+    <form id="myForm" asp-controller="Eczaneler" asp-action="EczaneKayit" method="post">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label asp-for="@Model.EczaneAdi" class="form-label">Eczane Adı:</label>
+                <input asp-for="@Model.EczaneAdi" class="form-control" />
+                <div class="invalid-feedback">Bu alan zorunludur.</div>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="@Model.EczaneAdresi" class="form-label">Eczane Adresi:</label>
+                <input asp-for="@Model.EczaneAdresi" class="form-control" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label asp-for="@Model.EczaneTelefon" class="form-label">Eczane Telefon:</label>
+                <input asp-for="@Model.EczaneTelefon" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="@Model.EczaneMail" class="form-label">Eczane Mail:</label>
+                <input asp-for="@Model.EczaneMail" class="form-control" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label asp-for="@Model.EczaneAdresTarifi" class="form-label">Eczane Adres Tarifi:</label>
+                <input asp-for="@Model.EczaneAdresTarifi" class="form-control" />
+                <div class="invalid-feedback">Bu alan zorunludur.</div>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="@Model.EczaneKordinatLatitude" class="form-label">Eczane Koordinat Latitude:</label>
+                <input asp-for="@Model.EczaneKordinatLatitude" class="form-control" />
+                <div class="invalid-feedback">Bu alan zorunludur.</div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label asp-for="@Model.EczaneKordinatLongitude" class="form-label">Eczane Koordinat Longitude:</label>
+                <input asp-for="@Model.EczaneKordinatLongitude" class="form-control" />
+                <div class="invalid-feedback">Bu alan zorunludur.</div>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="@Model.EczaneSahibiAdi" class="form-label">Eczane Sahibi Adı:</label>
+                <input asp-for="@Model.EczaneSahibiAdi" class="form-control" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label asp-for="@Model.EczaneSahibiSoyadi" class="form-label">Eczane Sahibi Soyadı:</label>
+                <input asp-for="@Model.EczaneSahibiSoyadi" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="@Model.EczaneSahibiTelefon" class="form-label">Eczane Sahibi Telefon:</label>
+                <input asp-for="@Model.EczaneSahibiTelefon" class="form-control" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label asp-for="@Model.EczaneSahibiTC" class="form-label">Eczane Sahibi TC:</label>
+                <input asp-for="@Model.EczaneSahibiTC" class="form-control" />
+            </div>
+            <div class="col-md-6">
+
+                <label asp-for="@Model.BolgelerId" class="form-label">Eczane Bölge:</label>
+                <select asp-for="@Model.BolgelerId" class="form-control">
+                    <option value="">Bölge Seçin</option>
+                    @foreach (var bolge in ViewBag.Bolgeler)
+                    {
+                        <option value="@bolge.Value">@bolge.Text</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label asp-for="@Model.SehirlerId" class="form-label">Eczane Şehir:</label>
+                <select asp-for="@Model.SehirlerId" class="form-control">
+                    <option value="">Şehir Seçin</option>
+                    @foreach (var sehir in ViewBag.Sehirler)
+                    {
+                        <option value="@sehir.Value">@sehir.Text</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" >Kaydet</button>
+            </div>
+        </div>
+    </form>
+
+</body>
+<script>
+    function submitForm() {
+        // Tüm alanların dolu olup olmadığını kontrol et
+        var formIsValid = true;
+        $('#myForm input').each(function () {
+            if ($(this).val() === '') {
+                formIsValid = false;
+                return false; // Döngüyü sonlandır
+            }
+        });
+
+        // Eğer tüm alanlar doluysa formu gönder
+        if (formIsValid) {
+            $('#myForm').submit();
+        } else {
+            alert('Lütfen tüm alanları doldurun.');
+        }
+    }
+    // Koordinatları ayırarak iki alanı güncelle
+    function updateKoordinatlar() {
+        var kordinatlar = $("#eczaneKordinatlar").val().split(','); // Virgülle ayrılmış koordinatları ayır
+        if (kordinatlar.length === 2) {
+            // İki değeri de ayrı ayrı güncelle
+            $("#EczaneKordinatLatitude").val(kordinatlar[0]);
+            $("#EczaneKordinatLongitude").val(kordinatlar[1]);
+        } else {
+            // Geçersiz koordinat formatı, hata mesajı verebilirsiniz
+            alert("Geçersiz koordinat formatı!");
+        }
+    }
+
+    // Koordinatları güncelleme işlemi, input değiştiğinde veya başka bir tetikleyici olayda çağrılabilir
+    $("#eczaneKordinatlar").on("change", function () {
+        updateKoordinatlar();
+    });
+</script>
+</html> 

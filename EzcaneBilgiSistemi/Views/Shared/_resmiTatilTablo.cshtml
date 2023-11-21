@@ -1,0 +1,151 @@
+﻿@using Entities.Models;
+@model List<ResmiTatiller>
+
+<body>
+    <div id="grdResmiTatiller">
+        <!-- Sayfa numarasını tutacak gizli bir input öğesi -->
+        <input type="hidden" id="currentPage" value="@ViewBag.PageNumber" />
+        <h2>Eczane Bilgileri</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="table-header" >Resmi Tatil</th>
+                    <th class="table-header" >Açıklama</th>
+                    <th class="table-header" >İşlem Tarihi</th>
+
+                    <th>Düzenle</th>
+                    <th>Sil</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var resmiTatiller in Model)
+                {
+                    <tr>
+                        <td>@resmiTatiller.Tarih.ToString("dd/MM/yyyy")</td>
+                        <td>@resmiTatiller.Acıklama</td>
+                        <td>@resmiTatiller.IslemTarihi.ToString("dd/MM/yyyy")</td>
+
+                        <td>
+                            <!-- Düzenle butonu ve modal tetikleyici -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal_@resmiTatiller.Id">
+                                Düzenle
+                            </button>
+
+                            <!-- Edit Modal -->
+                            <div class="modal fade" id="editModal_@resmiTatiller.Id" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="editModalLabel">Düzenle</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="myForm" asp-controller="ResmiTatiller" asp-action="ResmiTatilDuzenle" method="post" name="Duzenle">
+                                                <input type="hidden" name="Id" value="@resmiTatiller.Id" />
+
+                                                <div class="row mb-3">
+                                                    <label for="Tarih" class="form-label">Resmi Tatil:</label>
+                                                    <input type="date" class="form-control" id="Tarih" name="Tarih" value="@resmiTatiller.Tarih.ToString("dd/MM/yyyy")" required>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label for="Acıklama" class="form-label">Acıklama:</label>
+                                                    <input type="text" class="form-control" id="Acıklama" name="Acıklama" value="@resmiTatiller.Acıklama" required>
+
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label for="IslemTarihi" class="form-label">Islem Tarihi:</label>
+                                                    <input type="date" class="form-control" id="IslemTarihi" name="IslemTarihi" value="@resmiTatiller.IslemTarihi.ToString("dd/MM/yyyy")" required>
+                                                </div>
+
+                                                    <button type="submit">Kaydet</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                             <!-- Sil butonu ve modal tetikleyici -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal_@resmiTatiller.Id">
+                                Sil
+                            </button>
+
+                            <!-- Sil Modal -->
+                            <div class="modal fade" id="deleteModal_@resmiTatiller.Id" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel">Sil</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form asp-controller="ResmiTatiller" asp-action="ResmiTatilSil" method="post" name="sil">
+                                                <input type="hidden" name="Id" value="@resmiTatiller.Id" />
+                                                <h3>Emin misin</h3>
+                                                <button type="submit">Sil</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="pagination">
+            <ul class="pagination">
+                @for (int i = 1; i <= ViewBag.PageCount; i++)
+                {
+                    <li class="page-item @(i == ViewBag.PageNumber ? "active" : "")">
+                        <a class="page-link" asp-controller="ResmiTatiller" asp-action="Index" asp-route-page="@i">@i</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+
+            // Tablo başlıklarına tıklama olay dinleyicisi
+            $(document).on('click', '.table-header', function () {
+                var sortBy = $(this).data('sortby');
+                var currentPage = $('#currentPage').val();
+                getSortedEczaneler(sortBy, currentPage);
+            });
+
+            function getSortedEczaneler(sortBy, page) {
+                $.ajax({
+                    url: "/ResmiTatiller/Table",
+                    type: "GET",
+                    data: { page: page, sortBy: sortBy },
+                    success: function (res) {
+                        $('#grdResmiTatiller').html(res);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            }
+        });
+        function submitForm() {
+            // Tüm alanların dolu olup olmadığını kontrol et
+            var formIsValid = true;
+            $('#myForm input').each(function () {
+                if ($(this).val() === '') {
+                    formIsValid = false;
+                    return false; // Döngüyü sonlandır
+                }
+            });
+
+            // Eğer tüm alanlar doluysa formu gönder
+            if (formIsValid) {
+                $('#myForm').submit();
+            } else {
+                alert('Lütfen tüm alanları doldurun.');
+            }
+        }
+    </script>
+
+</body>

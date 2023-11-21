@@ -1,0 +1,133 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = EzcaneBilgiSistemi
+build_property.RootNamespace = EzcaneBilgiSistemi
+build_property.ProjectDir = D:\Projects\EzcaneBilgiSistemi\EzcaneBilgiSistemi\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\Projects\EzcaneBilgiSistemi\EzcaneBilgiSistemi
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/Ayarlar/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXlhcmxhclxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/Eczaneler/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWN6YW5lbGVyXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/GecmisNobetler/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VjbWlzTm9iZXRsZXJcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/MazeretBilgileri/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF6ZXJldEJpbGdpbGVyaVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/NobetAdetleri/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm9iZXRBZGV0bGVyaVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/NobetHazirla/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm9iZXRIYXppcmxhXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/OptimumMesafe/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3B0aW11bU1lc2FmZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/ResmiTatiller/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzbWlUYXRpbGxlclxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/Shared/Components/Footer/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcRm9vdGVyXERlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/Shared/Components/Leftbar/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcTGVmdGJhclxEZWZhdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/Shared/Components/Login/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcTG9naW5cRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/Shared/Components/Navbar/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcTmF2YmFyXERlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/Shared/Components/Rightbar/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcUmlnaHRiYXJcRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/Shared/_EczaneKayit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9FY3phbmVLYXlpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/Shared/_MazeretBilgiKayit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9NYXplcmV0QmlsZ2lLYXlpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/Shared/_mazeretBilgileriTablo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9tYXplcmV0QmlsZ2lsZXJpVGFibG8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/Shared/_OptimumTablo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9PcHRpbXVtVGFibG8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/Shared/_ResmiTatilKayit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9SZXNtaVRhdGlsS2F5aXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/Shared/_resmiTatilTablo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9yZXNtaVRhdGlsVGFibG8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/Shared/_search.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9zZWFyY2guY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/Shared/_SelectEczane.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9TZWxlY3RFY3phbmUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/Shared/_table.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF90YWJsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/EzcaneBilgiSistemi/EzcaneBilgiSistemi/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-97dm6zgdod

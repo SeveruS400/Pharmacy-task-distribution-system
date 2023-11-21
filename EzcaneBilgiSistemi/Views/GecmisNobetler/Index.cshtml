@@ -1,0 +1,94 @@
+﻿@model List<NobetGrupViewModel>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: center;
+        padding: 12px;
+        border: 1px solid #555;
+        ;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+</style>
+<body>
+    <div id="grdNobet">
+        <div class="row-cols-6">
+            <h2>Geçmiş Nöbetler</h2>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <button id="nobetSilButton">Nöbetleri Sil</button>
+            </div>
+            <div class="col-md-6" style="text-align:right">
+                <label for="nobetFilter">Gösterim:</label>
+                <select id="nobetFilter" onchange="filterNobet()">
+                    <option value="TumTurler">Tüm Nöbetler</option>
+                    <option value="Resmi Tatil">Resmi Tatiller</option>
+                    <option value="Cumartesi">Cumartesi</option>
+                    <option value="Pazar">Pazar</option>
+                    <option value="Haftaiçi">Haftaiçi</option>
+                </select>
+            </div>
+
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Tarih</th>
+                    <th>Nobet Türü</th>
+                    @for (int i = 1; i <= ViewBag.EczaneAdet; i++)
+                    {
+                        <th>Eczane @i</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var nobetGrup in Model)
+                {
+                    <tr style="@(nobetGrup.NobetTuru == "Resmi Tatil" ? "background-color: blue; color: white;" : nobetGrup.NobetTuru == "Cumartesi" || nobetGrup.NobetTuru == "Pazar" ? "background-color: orange; color: black;" : string.Empty)">
+                        <td>@nobetGrup.Tarih.ToString("dd/MM/yyyy")</td>
+                        <td>@nobetGrup.NobetTuru</td>
+                        @for (int i = 0; i < ViewBag.EczaneAdet; i++)
+                        {
+                            if (i < nobetGrup.EczaneAdlari.Count)
+                            {
+                                <td>@nobetGrup.EczaneAdlari[i]</td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+
+<script>
+    function filterNobet() {
+        var filterValue = document.getElementById("nobetFilter").value;
+        var rows = document.querySelectorAll("#grdNobet tbody tr");
+
+        rows.forEach(function (row) {
+            var nobetTuru = row.cells[1].innerText; // Nobet Türü sütunu
+
+            if (filterValue === "TumTurler" || filterValue === nobetTuru) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    }
+    document.getElementById("nobetSilButton").addEventListener("click", function () {
+        window.location.href = "/GecmisNobetler/NobetSil";
+    });
+</script>

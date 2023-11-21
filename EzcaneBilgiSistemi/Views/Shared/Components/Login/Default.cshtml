@@ -1,0 +1,89 @@
+﻿@using Entities.Models
+@model Users
+
+
+
+<div class="login-container" id="login-container">
+    <h1>Login</h1>
+    @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+    {
+        <div class="alert alert-danger">
+            <h3 style="color:red">@ViewBag.ErrorMessage</h3>
+        </div>
+    }
+    <form asp-action="Login" asp-controller="LoginRegister" method="post">
+        <div class="row mb-3">
+            <input type="email" asp-for=Email placeholder="Email">
+        </div>
+        <div class="row mb-3">
+            <input type="password" asp-for=Password placeholder="Parola">
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <button type="submit">Login</button>
+            </div>
+            <div class="col-md-6">
+                <button type="button" class="btn btn-primary" onclick="showRegisterForm()">
+                    Register
+                </button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<div class="register-container" id="register-container" style="display: none;">
+    <h1>Register</h1>
+    <form asp-action="Register" asp-controller="LoginRegister" method="post">
+        <input type="string" asp-for=UserName placeholder="Kullanıcı Adı">
+        <input type="email" asp-for=Email placeholder="Email">
+        <input type="password" asp-for=Password placeholder="Parola">
+        <button type="submit">Register</button>
+    </form>
+    <button type="button" class="btn btn-primary" onclick="showLoginForm()">
+        Login
+    </button>
+</div>
+
+<div class="background-container">
+
+    <style>
+        /* styles.css veya ilgili dosyanıza ekleyin */
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            object-fit: cover;
+            pointer-events: none; /* Tıklamaların arka plana etki etmemesi için */
+            background-image: url('../assets/images/logo.jpeg'); /* Fotoğrafınızın yolu */
+            background-repeat: repeat; /* Yineleme ayarı */
+            background-size: 7%;
+        }
+
+        .login-container, .register-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px; /* Dikdörtgen genişliği */
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8); /* %30 transparan siyah arkaplan */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Hafif bir gölge efekti */
+            color: white; /* Metin rengi */
+        }
+    </style>
+</div>
+<script>
+    function showRegisterForm() {
+        document.getElementById('login-container').style.display = 'none';
+        document.getElementById('register-container').style.display = 'block';
+    }
+    function showLoginForm() {
+        document.getElementById('login-container').style.display = 'block';
+        document.getElementById('register-container').style.display = 'none';
+    }
+</script>

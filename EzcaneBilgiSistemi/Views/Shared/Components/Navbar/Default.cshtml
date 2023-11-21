@@ -1,0 +1,79 @@
+﻿<div class="navbar-header">
+    <div class="d-flex" style="height:70px;">
+        <!-- LOGO -->
+        <div class="navbar-brand-box" >
+@*             <span class="logo-lg">
+                <img src="~/assets/images/logo.jpeg" alt="" height="100" />
+            </span> *@
+        </div>
+
+        <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect" id="vertical-menu-btn" onclick="toggleIcons()">
+            <i id="left-icon" class="fa-solid fa-arrow-left"></i>
+            <i id="right-icon" class="fa-solid fa-arrow-right" style="display: none;"></i>
+        </button>
+
+
+    </div>
+
+    <div class="d-flex">
+
+        <div class="dropdown d-none d-lg-inline-block">
+            <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen" onclick="expandIcons()">
+                <i id="left-icon-ex" class="fa-solid fa-up-right-and-down-left-from-center"></i>
+                <i id="right-icon-col" class="fa-solid fa-down-left-and-up-right-to-center" style="display: none;"></i>
+            </button>
+        </div>
+
+        <div class="dropdown d-inline-block">
+            <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa-solid fa-power-off fa-xl"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end">
+                <!-- item-->
+@*                 <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle font-size-17 align-middle me-1"></i> Profile</a>
+                <div class="dropdown-divider"></div> *@
+                <a class="dropdown-item text-danger" asp-action="Logout" asp-controller="LoginRegister"><i class="bx bx-power-off font-size-17 align-middle me-1 text-danger"></i> Logout</a>
+            </div>
+        </div>
+
+@*         <div class="dropdown d-inline-block">
+            <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
+                <i class="mdi mdi-cog-outline"></i>
+            </button>
+        </div> *@
+
+    </div>
+</div>
+<script>
+    function toggleIcons() {
+        var leftIcon = document.getElementById("left-icon");
+        var rightIcon = document.getElementById("right-icon");
+
+        // Sol ikon görünür, sağ ikonu görünmez yap
+        if (leftIcon.style.display !== "none") {
+            leftIcon.style.display = "none";
+            rightIcon.style.display = "block";
+        }
+        // Sağ ikon görünür, sol ikonu görünmez yap
+        else {
+            leftIcon.style.display = "block";
+            rightIcon.style.display = "none";
+        }
+    }
+    function expandIcons() {
+        var leftIcon = document.getElementById("left-icon-ex");
+        var rightIcon = document.getElementById("right-icon-col");
+
+        // Sol ikon görünür, sağ ikonu görünmez yap
+        if (leftIcon.style.display !== "none") {
+            leftIcon.style.display = "none";
+            rightIcon.style.display = "block";
+        }
+        // Sağ ikon görünür, sol ikonu görünmez yap
+        else {
+            leftIcon.style.display = "block";
+            rightIcon.style.display = "none";
+        }
+    }
+</script>

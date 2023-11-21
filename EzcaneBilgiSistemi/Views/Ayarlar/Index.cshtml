@@ -1,0 +1,73 @@
+﻿@model UygulamaAyarları
+
+@* <h3>@Model.EczaneAramaCap</h3>
+<h3>@Model.HaftaiciNS</h3>
+<h3>@Model.CumartesiNS</h3>
+<h3>@Model.PazarNS</h3>
+<h3>@Model.ResmiNS</h3>
+<h3>@Model.NobetOSDinlenme</h3>
+<h3>@Model.AyniNobetTuruKarsilasmasin</h3> *@
+
+<form id="ayarlarForm">
+    <div class="row mb-3">
+        <label for="EczaneAramaCap" class="form-label">Eczane Arama Çapı (KM):</label>
+        <input type="number" class="form-control" id="EczaneAramaCap" name="EczaneAramaCap" value="@Model.EczaneAramaCap" required>
+    </div>
+    <div class="row mb-3">
+        <label for="HaftaiciNS" class="form-label">Haftaici Nöbet Adedi:</label>
+        <input type="number" class="form-control" id="HaftaiciNS" name="HaftaiciNS" value="@Model.HaftaiciNS" required>
+    </div>
+    <div class="row mb-3">
+        <label for="CumartesiNS" class="form-label">Cumartesi Nöbet Adedi:</label>
+        <input type="number" class="form-control" id="CumartesiNS" name="CumartesiNS" value="@Model.CumartesiNS" required>
+    </div>
+    <div class="row mb-3">
+        <label for="PazarNS" class="form-label">Pazar Nöbet Adedi:</label>
+        <input type="number" class="form-control" id="PazarNS" name="PazarNS" value="@Model.PazarNS" required>
+    </div>
+    <div class="row mb-3">
+        <label for="ResmiNS" class="form-label">Resmi Tatil Nöbet Adedi:</label>
+        <input type="number" class="form-control" id="ResmiNS" name="ResmiNS" value="@Model.ResmiNS" required>
+    </div>
+    <div class="row mb-3">
+        <label for="NobetOSDinlenme" class="form-label">Nöbet Öncesi/Sonrası Dinlenme Süresi:</label>
+        <input type="number" class="form-control" id="NobetOSDinlenme" name="NobetOSDinlenme" value="@Model.NobetOSDinlenme" required>
+    </div>
+    <div class="row mb-3">
+        <label for="AyniNobetTuruKarsilasmasin" class="form-label">Aynı Nöbet Türünde Karşılaşmasın:</label>
+        <input type="number" class="form-control" id="AyniNobetTuruKarsilasmasin" name="AyniNobetTuruKarsilasmasin" value="@Model.AyniNobetTuruKarsilasmasin" required>
+    </div>
+
+    <button type="button" onclick="guncelleAyarlar()">Ayarları Güncelle</button>
+</form>
+
+<script>
+    function guncelleAyarlar() {
+        var yeniAyarlar = {
+            EczaneAramaCap: parseInt(document.getElementById("EczaneAramaCap").value),
+            HaftaiciNS: parseInt(document.getElementById("HaftaiciNS").value),
+            CumartesiNS: parseInt(document.getElementById("CumartesiNS").value),
+            PazarNS: parseInt(document.getElementById("PazarNS").value),
+            ResmiNS: parseInt(document.getElementById("ResmiNS").value),
+            NobetOSDinlenme: parseInt(document.getElementById("NobetOSDinlenme").value),
+            AyniNobetTuruKarsilasmasin: parseInt(document.getElementById("AyniNobetTuruKarsilasmasin").value),
+        };
+
+        // AJAX kullanarak sunucuya yeni ayarları gönderme
+        $.ajax({
+            url: "/Ayarlar/AyarlariGuncelle",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(yeniAyarlar),
+            success: function () {
+                // Başarıyla güncellendiğinde yapılacak işlemler
+                alert("Ayarlar başarıyla güncellendi!");
+                location.reload();
+            },
+            error: function (error) {
+                console.error(error);
+                alert("Ayarlar güncellenirken bir hata oluştu!");
+            }
+        });
+    }
+</script>

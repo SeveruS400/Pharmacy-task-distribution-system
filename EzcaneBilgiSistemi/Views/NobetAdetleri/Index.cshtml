@@ -1,0 +1,73 @@
+﻿@* @using Entities.Models;
+@model Nobetler
+
+
+<div class="row mb-3">
+    <div class="col-md-2">
+        <label for="baslangicTarihi">Başlangıç Tarihi:</label>
+        <input type="date" id="baslangicTarihi">
+    </div>
+    <div class="col-md-2">
+        <label for="bitisTarihi">Bitiş Tarihi:</label>
+        <input type="date" id="bitisTarihi">
+    </div>
+    <div class="col-md-6">
+        <partial name="_search" inputId="#txtSearch" tableSelector="#grdNobetAdetleri" tableUrl="/NobetAdetleri/Table" />
+    </div>
+</div>
+
+<div id="grdNobetAdetleri">
+</div>
+
+<script>
+    $(document).ready(function () {
+        function tabloyuYukle(page) {
+            $.ajax({
+                url: '/NobetAdetleri/Table',
+                type: 'GET',
+                data: { page: page },
+                dataType: 'html',
+                success: function (result) {
+                    $('#grdNobetAdetleri').html(result);
+                },
+                error: function (error) {
+                    console.log('AJAX hatası:', error);
+                }
+            });
+        }
+
+        tabloyuYukle(1); // İlk veriyi yükle
+
+        // Sayfalama bağlantıları için olay dinleyici
+        $(document).on('click', '.pagination a', function (e) {
+            e.preventDefault();
+            var page = $(this).attr('href').split('=')[1];
+            tabloyuYukle(page);
+        });
+    });
+</script> *@
+@model List<NobetStatisticsViewModel>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Eczane Adı</th>
+            <th>Resmi Tatil</th>
+            <th>Cumartesi</th>
+            <th>Pazar</th>
+            <th>Haftaiçi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.EczaneAdi</td>
+                <td>@item.ResmiTatilSayisi</td>
+                <td>@item.CumartesiSayisi</td>
+                <td>@item.PazarSayisi</td>
+                <td>@item.HaftaiciSayisi</td>
+            </tr>
+        }
+    </tbody>
+</table>

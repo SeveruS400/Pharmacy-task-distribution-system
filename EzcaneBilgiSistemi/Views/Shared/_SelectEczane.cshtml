@@ -1,0 +1,57 @@
+﻿
+
+@if (ViewBag.Eczaneler != null && ViewBag.Eczaneler.Count > 0)
+{
+    <div class="row mb-3">
+        <label class="form-label">Eczane Adı:</label>
+        <select id="selectedEczane" class="form-control">
+            <option value="">Eczaneyi Seçin</option>
+            @foreach (var eczane in ViewBag.Eczaneler)
+            {
+                <option value="@eczane.Value"
+                        data-latitude="@eczane.Latitude"
+                        data-longitude="@eczane.Longitude">
+                    @eczane.Text
+                </option>
+            }
+        </select>
+
+    </div>
+}
+else
+{
+    <h3>Kayıtlı eczane bulunmamaktadır!!!</h3>
+}
+
+
+<!-- Buton ile çağrılan JavaScript fonksiyonu -->
+<button type="button" onclick="searchEczaneler()">Aramayı Başlat</button>
+
+@* <!-- JavaScript kodu -->
+<script>
+    function searchEczaneler() {
+        // Seçilen eczane dropdown elemanını al
+        var selectedEczaneDropdown = document.getElementById("selectedEczane");
+
+        // Dropdown'dan seçilen eczane elemanını al
+        var selectedEczaneOption = selectedEczaneDropdown.options[selectedEczaneDropdown.selectedIndex];
+
+        // Seçilen eczanenin konum verilerini al
+        var selectedEczaneLatitude = selectedEczaneOption.getAttribute("data-latitude");
+        var selectedEczaneLongitude = selectedEczaneOption.getAttribute("data-longitude");
+
+        // AJAX kullanarak sunucuya veri gönderme
+        $.ajax({
+            url: "/OptimumMesafe/GetEczanelerInRange",
+            type: "GET",
+            data: {
+                merkezLatitude: selectedEczaneLatitude,
+                merkezLongitude: selectedEczaneLongitude,
+                cap: 1
+            },
+            error: function (error) {
+                console.error(error);
+            }
+        });
+    }
+</script> *@

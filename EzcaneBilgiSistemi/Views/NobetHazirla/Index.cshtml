@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <title>Nöbet Hazırla</title>
+    <!-- jQuery ve Bootstrap kütüphanelerini ekleyin -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <h2>Nöbet Hazırla</h2>
+
+    <!-- Modal -->
+    <div class="modal" id="errorModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <p style="color:red;">@ViewBag.ErrorMessage</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form id="nobetHazirlaForm">
+        <div>
+            <label for="baslangicTarihi">Başlangıç Tarihi:</label>
+            <input type="date" id="baslangicTarihi" name="baslangicTarihi" placeholder="YYYY/MM/DD" required />
+        </div>
+        <div>
+            <label for="bitisTarihi">Bitiş Tarihi:</label>
+            <input type="date" id="bitisTarihi" name="bitisTarihi" placeholder="YYYY/MM/DD" required />
+        </div>
+        <div>
+            <button type="button" onclick="nobetHazirla()">Nöbet Hazırla</button>
+        </div>
+    </form>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+        function nobetHazirla() {
+            var baslangicTarihi = document.getElementById("baslangicTarihi").value;
+            var bitisTarihi = document.getElementById("bitisTarihi").value;
+
+            var data = {
+                startDate: baslangicTarihi,
+                endDate: bitisTarihi
+            };
+
+            // jQuery ile POST isteği gönderme
+            $.ajax({
+                type: "POST",
+                url: "/NobetHazirla/NobetDagit",
+                data: data,
+                success: function (result) {
+                    if (result.Success) {
+                        // Başarılıysa, başka bir işlem yapabilirsiniz (örneğin, sayfayı yenileme)
+                        location.reload();
+                    } else {
+                        // Hata olduğunda modalı aç
+
+                        $("#errorModal").modal('show');
+                        con
+                        
+                    }
+                },
+                error: function (error) {
+                    console.error("Hata oluştu:", error);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+﻿<body>
+    <label for="txtSearch">Arama:</label>
+    <input type="text" id="txtSearch">
+    <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        function setupTableSearch(inputId, tableSelector, tableUrl) {
+            $(document).ready(function () {
+                $(inputId).on('keyup', function () {
+                    searchTable();
+                });
+
+                function searchTable() {
+                    var searchText = $(inputId).val();
+                    var page = 1;
+                    $.ajax({
+                        url: tableUrl,
+                        type: "GET",
+                        data: { Text: searchText, page: page },
+                        success: function (res) {
+                            $(tableSelector).html(res);
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    });
+                }
+            });
+        }
+
+        // Kullanım örneği:
+        setupTableSearch('#txtSearch', '#grdEczaneler', '/Eczaneler/Table');
+    </script>
+</body>
+
+
+
+@*     <script>
+        $(document).ready(function () {
+            $('#txtSearch').on('keyup', function () {
+                getEczaneler();
+            });
+
+            function getEczaneler() {
+                var searchText = $('#txtSearch').val();
+                var page = 1;
+                $.ajax({
+                    url: "/Eczaneler/Table",
+                    type: "GET",
+                    data: { Text: searchText, page: page },
+                    success: function (res) {
+                        $('#grdEczaneler').html(res);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            }
+        });
+    </script> *@

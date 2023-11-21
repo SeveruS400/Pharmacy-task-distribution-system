@@ -1,0 +1,82 @@
+﻿
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <title>Eczaneler</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
+    <meta content="Themesbrand" name="author">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="Assets/images/favicon.ico">
+
+    <link href="Assets/libs/chartist/chartist.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Css -->
+    <link href="Assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css">
+@*     <!-- Icons Css -->
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css"> *@
+    <!-- App Css-->
+    <link href="Assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css">
+    <script src="https://kit.fontawesome.com/54d0f5ad44.js" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body data-sidebar="dark" style="padding-top: 80px; ">
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+
+        <header id="page-topbar">
+            @await Component.InvokeAsync("Navbar")
+        </header>
+
+        <!-- ========== Left Sidebar Start ========== -->
+        @await Component.InvokeAsync("Leftbar")
+        <!-- Left Sidebar End -->
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content" style="padding-left: 30px;padding-right: 30px;">
+            @RenderBody()
+
+            <!-- End Page-content -->
+            @await Component.InvokeAsync("Footer")
+        </div>
+        <!-- end main content-->
+
+    </div>
+    <!-- END layout-wrapper -->
+    <!-- Right Sidebar -->
+    @await Component.InvokeAsync("Rightbar")
+    <!-- /Right-bar -->
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
+
+    <!-- JAVASCRIPT -->
+    @* <script src="/assets/libs/jquery/jquery.min.js"></script> *@
+    <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/Assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/Assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="/Assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="/Assets/libs/node-waves/waves.min.js"></script>
+
+
+    <!-- Peity chart-->
+    <script src="/Assets/libs/peity/jquery.peity.min.js"></script>
+
+    <!-- Plugin Js-->
+    <script src="/Assets/libs/chartist/chartist.min.js"></script>
+    <script src="/Assets/libs/chartist-plugin-tooltips/chartist-plugin-tooltip.min.js"></script>
+
+    <script src="/Assets/js/pages/dashboard.init.js"></script>
+
+    <script src="/Assets/js/app.js"></script>
+
+</body>
+
+</html>

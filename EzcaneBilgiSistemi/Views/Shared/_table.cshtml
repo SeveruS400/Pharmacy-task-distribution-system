@@ -1,0 +1,202 @@
+﻿@model List<Entities.Models.EczaneBilgileri>
+
+<body>
+    <div id="grdEczaneler">
+        <!-- Sayfa numarasını tutacak gizli bir input öğesi -->
+        <input type="hidden" id="currentPage" value="@ViewBag.PageNumber" />
+        <h2>Eczane Bilgileri</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="table-header" data-sortby="ID">ID</th>
+                    <th class="table-header" data-sortby="EczaneAdi">Eczane Adı</th>
+                    <th class="table-header" data-sortby="EczaneAdresi">Eczane Adresi</th>
+                    <th class="table-header" data-sortby="EczaneTelefon">Eczane Telefonu</th>
+                    <th>Eczane Maili</th>
+                    @* <th>Eczane Bölgesi</th> *@
+                    @* <th>Sehir</th> *@
+                    <th>Eczane Sahibinin Adı</th>
+                    <th>Eczane Sahibinin Soyadı</th>
+                    <th>Eczane Sahibinin Telefonu</th>
+                    <th>Düzenle</th>
+                    <th>Sil</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var eczaneBilgisi in Model)
+                {
+                    <tr>
+                        <td>@eczaneBilgisi.Id</td>
+                        <td>@eczaneBilgisi.EczaneAdi</td>
+                        <td>@eczaneBilgisi.EczaneAdresi</td>
+                        <td>@eczaneBilgisi.EczaneTelefon</td>
+                        <td>@eczaneBilgisi.EczaneMail</td>
+                        @* <td>@eczaneBilgisi.EczaneBolge</td> *@
+                        <td>@eczaneBilgisi.EczaneSahibiAdi</td>
+                        <td>@eczaneBilgisi.EczaneSahibiSoyadi</td>
+                        <td>@eczaneBilgisi.EczaneSahibiTelefon</td>
+                        <td>
+                            <!-- Düzenle butonu ve modal tetikleyici -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal_@eczaneBilgisi.Id">
+                                Düzenle
+                            </button>
+
+                            <!-- Edit Modal -->
+                            <div class="modal fade" id="editModal_@eczaneBilgisi.Id" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="editModalLabel">Düzenle</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="myForm" asp-controller="Eczaneler" asp-action="EczaneDuzenle" method="post" name="Duzenle">
+                                                <input type="hidden" name="Id" value="@eczaneBilgisi.Id" />
+                                                <input type="hidden" name="BolgelerId" value="@eczaneBilgisi.BolgelerId" />
+                                                <input type="hidden" name="SehirlerId" value="@eczaneBilgisi.SehirlerId" />
+                                                <input type="hidden" name="EczaneAdresTarifi" value="@eczaneBilgisi.EczaneAdresTarifi" />
+                                                <div class="mb-3">
+                                                    <div class="col-md-6">
+                                                        <label for="eczaneAdi" class="form-label">Eczane Adı:</label>
+                                                        <input type="text" class="form-control" id="eczaneAdi" name="EczaneAdi" value="@eczaneBilgisi.EczaneAdi" required>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="eczaneAdresi" class="form-label">Eczane Adresi:</label>
+                                                        <input type="text" class="form-control" id="eczaneAdresi" name="EczaneAdresi" value="@eczaneBilgisi.EczaneAdresi" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <div class="col-md-6">
+                                                        <label for="eczaneTelefon" class="form-label">Eczane Telefon:</label>
+                                                        <input type="tel" class="form-control" id="eczaneTelefon" name="EczaneTelefon" value="@eczaneBilgisi.EczaneTelefon" required>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="eczaneMail" class="form-label">Eczane Mail:</label>
+                                                        <input type="email" class="form-control" id="eczaneMail" name="EczaneMail" value="@eczaneBilgisi.EczaneMail">
+                                                    </div>
+                                                </div>
+
+                                                @*                                                 <div class="mb-3">
+                                            <label for="BolgelerId" class="form-label">Eczane Bölge:</label>
+                                            <input type="text" class="form-control" id="BolgelerId" name="BolgelerId" value="@eczaneBilgisi.BolgelerId">
+                                            </div>  *@
+                                                <div class="mb-3">
+                                                    <div class="col-md-6">
+                                                        <label for="eczaneKordinatLongitude" class="form-label">Eczane Koordinat Longitude:</label>
+                                                        <input type="number" step="any" class="form-control" id="eczaneKordinatLongitude" name="EczaneKordinatLongitude" value="@eczaneBilgisi.EczaneKordinatLongitude">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="eczaneKordinatLatitude" class="form-label">Eczane Koordinat Latitude:</label>
+                                                        <input type="number" step="any" class="form-control" id="eczaneKordinatLatitude" name="EczaneKordinatLatitude" value="@eczaneBilgisi.EczaneKordinatLatitude">
+                                                    </div>
+
+                                                <div class="mb-3">
+                                                    <div class="col-md-6">
+                                                        <label for="eczaneSahibiAdi" class="form-label">Eczane Sahibi Adı:</label>
+                                                        <input type="text" class="form-control" id="eczaneSahibiAdi" name="EczaneSahibiAdi" value="@eczaneBilgisi.EczaneSahibiAdi">
+                                                    </div>
+                                                        <div class="col-md-6">
+                                                            <label for="eczaneSahibiSoyadi" class="form-label">Eczane Sahibi Soyadı:</label>
+                                                            <input type="text" class="form-control" id="eczaneSahibiSoyadi" name="EczaneSahibiSoyadi" value="@eczaneBilgisi.EczaneSahibiSoyadi">
+                                                        </div>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <div class="col-md-6">
+                                                        <label for="eczaneSahibiTelefon" class="form-label">Eczane Sahibi Telefon:</label>
+                                                        <input type="tel" class="form-control" id="eczaneSahibiTelefon" name="EczaneSahibiTelefon" value="@eczaneBilgisi.EczaneSahibiTelefon">
+                                                    </div>
+                                                </div>
+                                                <button type="submit">Kaydet</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <!-- Sil butonu ve modal tetikleyici -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal_@eczaneBilgisi.Id">
+                                Sil
+                            </button>
+
+                            <!-- Sil Modal -->
+                            <div class="modal fade" id="deleteModal_@eczaneBilgisi.Id" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel">Sil</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form asp-controller="Eczaneler" asp-action="EzcaneSil" method="post" name="sil">
+                                                <input type="hidden" name="Id" value="@eczaneBilgisi.Id" />
+                                                <h3>Emin misin</h3>
+                                                <button type="submit">Sil</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="pagination">
+            <ul class="pagination">
+                @for (int i = 1; i <= ViewBag.PageCount; i++)
+                {
+                    <li class="page-item @(i == ViewBag.PageNumber ? "active" : "")">
+                        <a class="page-link" asp-controller="EczaneBilgileri" asp-action="Index" asp-route-page="@i">@i</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+
+            // Tablo başlıklarına tıklama olay dinleyicisi
+            $(document).on('click', '.table-header', function () {
+                var sortBy = $(this).data('sortby');
+                var currentPage = $('#currentPage').val();
+                getSortedEczaneler(sortBy, currentPage);
+            });
+
+            function getSortedEczaneler(sortBy, page) {
+                $.ajax({
+                    url: "/EczaneBilgileri/Table",
+                    type: "GET",
+                    data: { page: page, sortBy: sortBy },
+                    success: function (res) {
+                        $('#grdEczaneler').html(res);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            }
+        });
+        function submitForm() {
+            // Tüm alanların dolu olup olmadığını kontrol et
+            var formIsValid = true;
+            $('#myForm input').each(function () {
+                if ($(this).val() === '') {
+                    formIsValid = false;
+                    return false; // Döngüyü sonlandır
+                }
+            });
+
+            // Eğer tüm alanlar doluysa formu gönder
+            if (formIsValid) {
+                $('#myForm').submit();
+            } else {
+                alert('Lütfen tüm alanları doldurun.');
+            }
+        }
+    </script>
+
+</body>

@@ -1,0 +1,45 @@
+﻿@using Entities.Models;
+@model List<EczaneBilgileri>
+<head>
+    <!-- Diğer head içeriği -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+
+<body>
+    <partial name="_SelectEczane"/>
+    <div id="grdEzcane" >     
+    </div>
+    <script>
+        function searchEczaneler() {
+            // Seçilen eczane dropdown elemanını al
+            var selectedEczaneDropdown = document.getElementById("selectedEczane");
+
+            // Dropdown'dan seçilen eczane elemanını al
+            var selectedEczaneOption = selectedEczaneDropdown.options[selectedEczaneDropdown.selectedIndex];
+
+            // Seçilen eczanenin konum verilerini al
+            var selectedEczaneLatitude = selectedEczaneOption.getAttribute("data-latitude");
+            var selectedEczaneLongitude = selectedEczaneOption.getAttribute("data-longitude");
+
+            // AJAX kullanarak sunucuya veri gönderme
+            $.ajax({
+                url: "/OptimumMesafe/GetEczanelerInRange",
+                type: "GET",
+                data: {
+                    merkezLatitude: selectedEczaneLatitude,
+                    merkezLongitude: selectedEczaneLongitude,
+                    cap: 1
+                },
+                success: function (data) {
+                    // AJAX çağrısı başarılı olduğunda bu fonksiyon çalışır
+                    // data içinde dönen verileri kullanarak sayfayı güncelle
+                    $('#grdEzcane').html(data);
+                    $('#grdEzcane').show();
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        }
+    </script>
+</body>

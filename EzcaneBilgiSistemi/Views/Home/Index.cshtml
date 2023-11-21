@@ -1,0 +1,29 @@
+﻿@using Entities.Models;
+@model List<Nobetler>
+
+<h2> Nöbetci Eczane Bilgileri</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nöbet Tarihi</th>
+            <th>Eczane Telefonu</th>
+            <th>Eczane Adı</th>
+            <th>Eczane Adresi</th>
+            <th>Eczane Adres Tarifi</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var eczaneBilgisi in Model)
+        {
+            <tr>
+                <td>@eczaneBilgisi.Tarih.ToString("dd/MM/yyyy")</td>
+                <td>@eczaneBilgisi.EczaneBilgileri.EczaneTelefon</td>
+                <td>@eczaneBilgisi.EczaneBilgileri.EczaneAdi</td>
+                <td>@eczaneBilgisi.EczaneBilgileri.EczaneAdresi</td>
+                <td>@eczaneBilgisi.EczaneBilgileri.EczaneAdresTarifi</td>
+               
+            </tr>
+        }
+    </tbody>
+</table> 

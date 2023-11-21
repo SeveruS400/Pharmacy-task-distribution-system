@@ -1,0 +1,55 @@
+﻿@using Entities.Models;
+@model ResmiTatiller
+
+<partial name="_search" inputId="#txtSearch" tableSelector="#grdResmiTatiller" tableUrl="/ResmiTatiller/Table" />
+
+<div id="grdResmiTatiller">
+</div>
+<div>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Resmi Tatil Ekle
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel"> Eczane Bilgileri</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>wsedafsdfa</p>
+                    <partial name="_ResmiTatilKayit" for="@Model" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        function tabloyuYukle(page) {
+            $.ajax({
+                url: '/ResmiTatiller/Table',
+                type: 'GET',
+                data: { page: page },
+                dataType: 'html',
+                success: function (result) {
+                    $('#grdResmiTatiller').html(result);
+                },
+                error: function (error) {
+                    console.log('AJAX hatası:', error);
+                }
+            });
+        }
+
+        tabloyuYukle(1); // İlk veriyi yükle
+
+        // Sayfalama bağlantıları için olay dinleyici
+        $(document).on('click', '.pagination a', function (e) {
+            e.preventDefault();
+            var page = $(this).attr('href').split('=')[1];
+            tabloyuYukle(page);
+        });
+    });
+</script>

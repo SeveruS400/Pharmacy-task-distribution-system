@@ -1,0 +1,123 @@
+﻿@using Entities.Models;
+@model List<MazeretBilgileri>
+
+<body>
+    <div id="grdMazeretBilgileri">
+        <!-- Sayfa numarasını tutacak gizli bir input öğesi -->
+        <input type="hidden" id="currentPage" value="@ViewBag.PageNumber" />
+        <h2>Eczane Bilgileri</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Eczane Adı</th>
+                    <th class="table-header">Başlama Tarihi</th>
+                    <th class="table-header">Bitiş Tarihi</th>
+                    <th class="table-header">Açıklama</th>
+                    <th class="table-header">İşlem Tarihi</th>
+
+                    <th>Düzenle</th>
+                    <th>Sil</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var mazeretBilgisi in Model)
+                {
+                    <tr>
+
+                        <td>@mazeretBilgisi.EczaneBilgileri.EczaneAdi</td>
+                        <td>@mazeretBilgisi.BitisTarihi.ToString("dd/MM/yyyy")</td>
+                        <td>@mazeretBilgisi.BaslamaTarihi.ToString("dd/MM/yyyy")</td>
+                        <td>@mazeretBilgisi.Acıklama</td>
+                        <td>@mazeretBilgisi.IslemTarihi.ToString("dd/MM/yyyy")</td>
+
+                        <td>
+                            <!-- Düzenle butonu ve modal tetikleyici -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal_@mazeretBilgisi.Id">
+                                Düzenle
+                            </button>
+
+                            <!-- Edit Modal -->
+                            <div class="modal fade" id="editModal_@mazeretBilgisi.Id" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="editModalLabel">Düzenle</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="myForm" asp-controller="MazeretBilgileri" asp-action="ResmiTatilDuzenle" method="post" name="Duzenle">
+                                                <input type="hidden" name="Id" value="@mazeretBilgisi.Id" />
+
+
+                                                <div class="row mb-3">
+                                                    <label for="EczaneBilgileri" class="form-label">Eczane Adı:</label>
+                                                    <input type="text" class="form-control" id="Tarih" name="Tarih" value="@mazeretBilgisi.EczaneBilgileriId" required>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label for="BitisTarihi" class="form-label">Bitis Tarihi:</label>
+                                                    <input type="datetime" class="form-control" id="BitisTarihi" name="BitisTarihi" value="@mazeretBilgisi.BitisTarihi" required>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label for="BaslamaTarihi" class="form-label">Baslama Tarihi:</label>
+                                                    <input type="datetime" class="form-control" id="BaslamaTarihi" name="BaslamaTarihi" value="@mazeretBilgisi.BaslamaTarihi" required>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label for="Acıklama" class="form-label">Acıklama:</label>
+                                                    <input type="text" class="form-control" id="Acıklama" name="Acıklama" value="@mazeretBilgisi.Acıklama" required>
+
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label for="IslemTarihi" class="form-label">Islem Tarihi:</label>
+                                                    <input type="datetime" class="form-control" id="IslemTarihi" name="IslemTarihi" value="@mazeretBilgisi.IslemTarihi" required>
+                                                </div>
+
+                                                <button type="submit">Kaydet</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        @* <td>
+                            <!-- Sil butonu ve modal tetikleyici -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal_@resmiTatiller.Id">
+                                Sil
+                            </button>
+
+                            <!-- Sil Modal -->
+                            <div class="modal fade" id="deleteModal_@resmiTatiller.Id" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel">Sil</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form asp-controller="ResmiTatiller" asp-action="ResmiTatilSil" method="post" name="sil">
+                                                <input type="hidden" name="Id" value="@resmiTatiller.Id" />
+                                                <h3>Emin misin</h3>
+                                                <button type="submit">Sil</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td> *@
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="pagination">
+            <ul class="pagination">
+                @for (int i = 1; i <= ViewBag.PageCount; i++)
+                {
+                    <li class="page-item @(i == ViewBag.PageNumber ? "active" : "")">
+                        <a class="page-link" asp-controller="MazeretBilgileri" asp-action="Index" asp-route-page="@i">@i</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
+</body>
