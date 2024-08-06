@@ -1,5 +1,1 @@
-special-vendored-path/* linguist-vendored
-# Apply override to a specific file
-csharp -linguist-vendored
-# Apply override to all files and directories in the directory
-ano-dir/** linguist-vendored
+.css linguist-language=csharp
