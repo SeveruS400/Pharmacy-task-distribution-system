@@ -1,5 +1,4 @@
 *.css linguist-detectable=false
-*.csharp linguist-vendored=true
 *.java linguist-detectable=false
-*.csharp linguist-detectable=false
-*.csharp linguist-language=c#
+*.javascript linguist-detectable=false
+
